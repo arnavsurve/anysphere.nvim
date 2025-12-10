@@ -4,106 +4,212 @@
 
 local M = {}
 
-M.colors = {
-	-- Base colors
-	bg = "#1A1A1A",
-	bg_dark = "#141414",
-	bg_highlight = "#292929",
-	bg_visual = "#303030",
-	bg_search = "#38474C",
+-- Default (vibrant) palette
+M.palettes = {
+	default = {
+		-- Base colors
+		bg = "#1A1A1A",
+		bg_dark = "#141414",
+		bg_highlight = "#292929",
+		bg_visual = "#303030",
+		bg_search = "#38474C",
 
-	-- Foreground colors
-	fg = "#D8DEE9",
-	fg_dark = "#D6D6DD",
-	fg_muted = "#CCCCCC",
-	fg_disabled = "#505050",
+		-- Foreground colors
+		fg = "#D8DEE9",
+		fg_dark = "#D6D6DD",
+		fg_muted = "#CCCCCC",
+		fg_disabled = "#505050",
 
-	-- Border colors
-	border = "#252525",
-	border_focused = "#88C0D0",
-	border_variant = "#2A2A2A",
+		-- Border colors
+		border = "#252525",
+		border_focused = "#88C0D0",
+		border_variant = "#2A2A2A",
 
-	-- UI elements
-	cursor = "#FFFFFF",
-	cursorline = "#292929",
-	line_nr = "#505050",
-	line_nr_active = "#FFFFFF",
-	scrollbar = "#404040",
+		-- UI elements
+		cursor = "#FFFFFF",
+		cursorline = "#292929",
+		line_nr = "#505050",
+		line_nr_active = "#FFFFFF",
+		scrollbar = "#404040",
 
-	-- Syntax colors
-	comment = "#6D6D6D",
-	keyword = "#83D6C5",
-	operator = "#83D6C5",
-	string = "#E394DC",
-	number = "#EBC88D",
-	func = "#EFB080",
-	type = "#87C3FF",
-	type_builtin = "#81D2CE",
-	property = "#81D2CE",
-	variable = "#D6D6DD",
-	variable_param = "#F8C762",
-	variable_special = "#C1808A",
-	constant = "#8A8A8A",
-	attribute = "#AAA0FA",
-	tag = "#FAD075",
-	punctuation = "#D6D6DD",
-	punctuation_bracket = "#FFD602",
-	preproc = "#A8CC7C",
-	constructor = "#EFB080",
-	regex = "#F8C762",
-	emphasis = "#83D6C5",
-	emphasis_strong = "#F8C762",
-	link_text = "#81A1C1",
-	link_uri = "#88C0D0",
+		-- Syntax colors
+		comment = "#6D6D6D",
+		keyword = "#83D6C5",
+		operator = "#83D6C5",
+		string = "#E394DC",
+		number = "#EBC88D",
+		func = "#EFB080",
+		type = "#87C3FF",
+		type_builtin = "#81D2CE",
+		property = "#81D2CE",
+		variable = "#D6D6DD",
+		variable_param = "#F8C762",
+		variable_special = "#C1808A",
+		constant = "#8A8A8A",
+		attribute = "#AAA0FA",
+		tag = "#FAD075",
+		punctuation = "#D6D6DD",
+		punctuation_bracket = "#FFD602",
+		preproc = "#A8CC7C",
+		constructor = "#EFB080",
+		regex = "#F8C762",
+		emphasis = "#83D6C5",
+		emphasis_strong = "#F8C762",
+		link_text = "#81A1C1",
+		link_uri = "#88C0D0",
 
-	-- Diagnostic colors
-	error = "#BF616A",
-	warning = "#EBCB8B",
-	info = "#88C0D0",
-	hint = "#696969",
-	success = "#A3BE8C",
+		-- Diagnostic colors
+		error = "#BF616A",
+		warning = "#EBCB8B",
+		info = "#88C0D0",
+		hint = "#696969",
+		success = "#A3BE8C",
 
-	-- Git colors
-	git_add = "#A3BE8C",
-	git_change = "#EBCB8B",
-	git_delete = "#BF616A",
-	git_rename = "#88C0D0",
-	git_conflict = "#EBCB8B",
+		-- Git colors
+		git_add = "#A3BE8C",
+		git_change = "#EBCB8B",
+		git_delete = "#BF616A",
+		git_rename = "#88C0D0",
+		git_conflict = "#EBCB8B",
 
-	-- Blended background colors (for diff/diagnostics)
-	diff_add_bg = "#252E24",
-	diff_change_bg = "#332F22",
-	diff_delete_bg = "#2D2123",
-	diff_text_bg = "#3D3A28",
-	diag_error_bg = "#2D2123",
-	diag_warn_bg = "#332F22",
-	diag_info_bg = "#263035",
-	diag_hint_bg = "#232323",
-	diag_ok_bg = "#252E24",
+		-- Blended background colors (for diff/diagnostics)
+		diff_add_bg = "#252E24",
+		diff_change_bg = "#332F22",
+		diff_delete_bg = "#2D2123",
+		diff_text_bg = "#3D3A28",
+		diag_error_bg = "#2D2123",
+		diag_warn_bg = "#332F22",
+		diag_info_bg = "#263035",
+		diag_hint_bg = "#232323",
+		diag_ok_bg = "#252E24",
 
-	-- Terminal ANSI colors
-	black = "#2A2A2A",
-	red = "#BF616A",
-	green = "#A3BE8C",
-	yellow = "#EBCB8B",
-	blue = "#81A1C1",
-	magenta = "#B48EAD",
-	cyan = "#88C0D0",
-	white = "#D8DEE9",
+		-- Terminal ANSI colors
+		black = "#2A2A2A",
+		red = "#BF616A",
+		green = "#A3BE8C",
+		yellow = "#EBCB8B",
+		blue = "#81A1C1",
+		magenta = "#B48EAD",
+		cyan = "#88C0D0",
+		white = "#D8DEE9",
 
-	-- Bright terminal colors
-	bright_black = "#505050",
-	bright_red = "#BF616A",
-	bright_green = "#A3BE8C",
-	bright_yellow = "#EBCB8B",
-	bright_blue = "#81A1C1",
-	bright_magenta = "#B48EAD",
-	bright_cyan = "#88C0D0",
-	bright_white = "#FFFFFF",
+		-- Bright terminal colors
+		bright_black = "#505050",
+		bright_red = "#BF616A",
+		bright_green = "#A3BE8C",
+		bright_yellow = "#EBCB8B",
+		bright_blue = "#81A1C1",
+		bright_magenta = "#B48EAD",
+		bright_cyan = "#88C0D0",
+		bright_white = "#FFFFFF",
+	},
+
+	-- Pale (pastel/muted) palette
+	pale = {
+		-- Base colors (same)
+		bg = "#1A1A1A",
+		bg_dark = "#141414",
+		bg_highlight = "#292929",
+		bg_visual = "#303030",
+		bg_search = "#38474C",
+
+		-- Foreground colors (slightly muted)
+		fg = "#B8C4CE",
+		fg_dark = "#A8B0B8",
+		fg_muted = "#909090",
+		fg_disabled = "#505050",
+
+		-- Border colors
+		border = "#252525",
+		border_focused = "#6A9AA8",
+		border_variant = "#2A2A2A",
+
+		-- UI elements
+		cursor = "#FFFFFF",
+		cursorline = "#292929",
+		line_nr = "#505050",
+		line_nr_active = "#BBBBBB",
+		scrollbar = "#404040",
+
+		-- Syntax colors (desaturated pastels)
+		comment = "#606060",
+		keyword = "#7EB8AD",
+		operator = "#7EB8AD",
+		string = "#C48BB8",
+		number = "#C9B07A",
+		func = "#C9A078",
+		type = "#7AA8D4",
+		type_builtin = "#7AB8B4",
+		property = "#7AB8B4",
+		variable = "#A8B0B8",
+		variable_param = "#CDAA68",
+		variable_special = "#A87880",
+		constant = "#787878",
+		attribute = "#9088C8",
+		tag = "#CDB878",
+		punctuation = "#A8B0B8",
+		punctuation_bracket = "#D4C058",
+		preproc = "#90A870",
+		constructor = "#C9A078",
+		regex = "#CDAA68",
+		emphasis = "#7EB8AD",
+		emphasis_strong = "#CDAA68",
+		link_text = "#7090A8",
+		link_uri = "#6A9AA8",
+
+		-- Diagnostic colors (softer)
+		error = "#A85860",
+		warning = "#C9B07A",
+		info = "#6A9AA8",
+		hint = "#606060",
+		success = "#88A878",
+
+		-- Git colors (softer)
+		git_add = "#88A878",
+		git_change = "#C9B07A",
+		git_delete = "#A85860",
+		git_rename = "#6A9AA8",
+		git_conflict = "#C9B07A",
+
+		-- Blended background colors (for diff/diagnostics)
+		diff_add_bg = "#232A22",
+		diff_change_bg = "#2E2B22",
+		diff_delete_bg = "#2A2022",
+		diff_text_bg = "#383525",
+		diag_error_bg = "#2A2022",
+		diag_warn_bg = "#2E2B22",
+		diag_info_bg = "#222830",
+		diag_hint_bg = "#222222",
+		diag_ok_bg = "#232A22",
+
+		-- Terminal ANSI colors (muted)
+		black = "#2A2A2A",
+		red = "#A85860",
+		green = "#88A878",
+		yellow = "#C9B07A",
+		blue = "#7090A8",
+		magenta = "#987890",
+		cyan = "#6A9AA8",
+		white = "#B8C4CE",
+
+		-- Bright terminal colors
+		bright_black = "#505050",
+		bright_red = "#A85860",
+		bright_green = "#88A878",
+		bright_yellow = "#C9B07A",
+		bright_blue = "#7090A8",
+		bright_magenta = "#987890",
+		bright_cyan = "#6A9AA8",
+		bright_white = "#D8DEE9",
+	},
 }
+
+-- For backwards compatibility
+M.colors = M.palettes.default
 
 function M.setup(opts)
 	opts = opts or {}
+	local style = opts.style or "default"
 
 	-- Reset highlighting
 	vim.cmd("hi clear")
@@ -112,9 +218,9 @@ function M.setup(opts)
 	end
 
 	vim.o.termguicolors = true
-	vim.g.colors_name = "anysphere"
+	vim.g.colors_name = style == "pale" and "anysphere-pale" or "anysphere"
 
-	local c = M.colors
+	local c = M.palettes[style] or M.palettes.default
 
 	-- Helper function for setting highlights
 	local function hi(group, hl)
