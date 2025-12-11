@@ -11,12 +11,12 @@ A dark Neovim colorscheme based on the Cursor editor theme.
 
 **lazy.nvim**
 ```lua
-{ "asurve/anysphere.nvim" }
+{ "arnavsurve/anysphere.nvim" }
 ```
 
 **packer**
 ```lua
-use "asurve/anysphere.nvim"
+use "arnavsurve/anysphere.nvim"
 ```
 
 ## Usage
